@@ -6,12 +6,15 @@ use Closure;
 
 /**
  * Lazy collection that is backed by a concrete collection
+ *
+ * @template T
  */
 abstract class AbstractLazyCollection implements Collection
 {
     /**
      * The backed collection to use
      *
+     * @psalm-var Collection<T>
      * @var Collection
      */
     protected $collection;
@@ -301,6 +304,8 @@ abstract class AbstractLazyCollection implements Collection
 
     /**
      * Initialize the collection
+     *
+     * @return void
      */
     protected function initialize()
     {
