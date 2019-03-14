@@ -32,6 +32,7 @@ use function uasort;
  * serialize a collection use {@link toArray()} and reconstruct the collection
  * manually.
  *
+ * @template TKey of string|int
  * @template T
  * @template-implements Collection<T>
  * @template-implements Selectable<T>
@@ -60,8 +61,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return array<T>
      */
     public function toArray()
     {
@@ -70,8 +69,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return T
      */
     public function first()
     {
@@ -98,8 +95,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return T
      */
     public function last()
     {
@@ -116,8 +111,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return T
      */
     public function next()
     {
@@ -126,8 +119,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return T
      */
     public function current()
     {
@@ -136,8 +127,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return T|null
      */
     public function remove($key)
     {
@@ -153,8 +142,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param T $element
      */
     public function removeElement($element)
     {
@@ -183,8 +170,6 @@ class ArrayCollection implements Collection, Selectable
      * Required by interface ArrayAccess.
      *
      * {@inheritDoc}
-     *
-     * @psalm-return T|null
      */
     public function offsetGet($offset)
     {
@@ -195,8 +180,6 @@ class ArrayCollection implements Collection, Selectable
      * Required by interface ArrayAccess.
      *
      * {@inheritDoc}
-     *
-     * @psalm-param T $value
      */
     public function offsetSet($offset, $value)
     {
@@ -228,8 +211,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param T $element
      */
     public function contains($element)
     {
@@ -238,8 +219,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param Closure(int|string, T):bool $p
      */
     public function exists(Closure $p)
     {
@@ -254,8 +233,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param T $element
      */
     public function indexOf($element)
     {
@@ -264,8 +241,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return T|null
      */
     public function get($key)
     {
@@ -282,8 +257,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return array<T>
      */
     public function getValues()
     {
@@ -300,8 +273,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param T $value
      */
     public function set($key, $value)
     {
@@ -310,8 +281,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param T $element
      */
     public function add($element)
     {
@@ -332,8 +301,6 @@ class ArrayCollection implements Collection, Selectable
      * Required by interface IteratorAggregate.
      *
      * {@inheritDoc}
-     *
-     * @psalm-return ArrayIterator<int|string, T>
      */
     public function getIterator()
     {
@@ -344,10 +311,6 @@ class ArrayCollection implements Collection, Selectable
      * {@inheritDoc}
      *
      * @return static
-     *
-     * @template U
-     * @psalm-param Closure(T):U $func
-     * @psalm-return Collection<U>
      */
     public function map(Closure $func)
     {
@@ -359,8 +322,7 @@ class ArrayCollection implements Collection, Selectable
      *
      * @return static
      *
-     * @psalm-param Closure(T):bool $p
-     * @psalm-return Collection<T>
+     * @psalm-return ArrayCollection<T>
      */
     public function filter(Closure $p)
     {
@@ -369,8 +331,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param Closure(int|string, T):bool $p
      */
     public function forAll(Closure $p)
     {
@@ -385,9 +345,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-param Closure(int|string, T):bool $p
-     * @psalm-return array{0: Collection<T>, 1: Collection<T>}
      */
     public function partition(Closure $p)
     {
@@ -424,8 +381,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return array<T>
      */
     public function slice($offset, $length = null)
     {
@@ -434,8 +389,6 @@ class ArrayCollection implements Collection, Selectable
 
     /**
      * {@inheritDoc}
-     *
-     * @psalm-return Collection<T>
      */
     public function matching(Criteria $criteria)
     {
